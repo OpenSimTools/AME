@@ -1,4 +1,4 @@
-﻿namespace GUI.ViewModels;
+﻿namespace AME.GUI.ViewModels;
 
 public class MainViewModel : ViewModelBase
 {

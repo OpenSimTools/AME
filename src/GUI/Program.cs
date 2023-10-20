@@ -3,7 +3,7 @@
 using Avalonia;
 using Avalonia.ReactiveUI;
 
-namespace GUI.Desktop;
+namespace AME.GUI;
 
 class Program
 {
