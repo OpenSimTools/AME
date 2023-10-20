@@ -1,9 +1,4 @@
-﻿using System;
-
-using Avalonia;
-using Avalonia.ReactiveUI;
-
-namespace AME.GUI;
+﻿namespace AME.GUI;
 
 class Program
 {

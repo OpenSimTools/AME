@@ -6,7 +6,64 @@
         xmlns:views="clr-namespace:AME.GUI.Views"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="AME.GUI.Views.MainWindow"
-        Icon="/Assets/avalonia-logo.ico"
+		x:DataType="vm:MainWindowViewModel"
+		Icon="/Assets/avalonia-logo.ico"
         Title="AMS2 Mods Editor">
-        <views:MainView />
+	<Design.DataContext>
+		<!-- This only sets the DataContext for the previewer in an IDE,
+         to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+		<vm:MainWindowViewModel />
+	</Design.DataContext>
+
+	<DockPanel>
+		<Menu DockPanel.Dock="Top">
+			<MenuItem Header="_File">
+				<MenuItem Header="_Open"/>
+				<MenuItem Header="_Save"/>
+			</MenuItem>
+		</Menu>
+
+		<TabControl>
+			<TabItem Header="Chassis">
+				<Grid Margin="5"
+  ColumnDefinitions="Auto,Auto"
+  RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto">
+					<Label Grid.Row="0" Grid.Column="0" Margin="10"
+						   Content="Mass" />
+					<TextBox Grid.Row="0" Grid.Column="1" Margin="0 5"
+							 Text="{Binding Mass}"/>
+
+					<Label Grid.Row="1" Grid.Column="0" Margin="10"
+						   Content="BodyDragBase" />
+					<TextBox Grid.Row="1" Grid.Column="1" Margin="0 5"
+							 Text="{Binding BodyDragBase}"/>
+
+					<Label Grid.Row="2" Grid.Column="0" Margin="10"
+						   Content="GeneralTorqueMult" />
+					<TextBox Grid.Row="2" Grid.Column="1" Margin="0 5"
+							 Text="{Binding GeneralTorqueMult}"/>
+
+					<Label Grid.Row="3" Grid.Column="0" Margin="10"
+						   Content="GeneralPowerMult" />
+					<TextBox Grid.Row="3" Grid.Column="1" Margin="0 5"
+							 Text="{Binding GeneralPowerMult}"/>
+
+					<Label Grid.Row="4" Grid.Column="0" Margin="10"
+				   Content="MaxForceAtSteeringRack" />
+					<TextBox Grid.Row="4" Grid.Column="1" Margin="0 5"
+							 Text="{Binding MaxForceAtSteeringRack}"/>
+
+					<Label Grid.Row="5" Grid.Column="0" Margin="10"
+					   Content="PneumaticTrail" />
+					<TextBox Grid.Row="5" Grid.Column="1" Margin="0 5"
+							 Text="{Binding PneumaticTrail}"/>
+
+					<Label Grid.Row="6" Grid.Column="0" Margin="10"
+					   Content="PneumaticTrailGripFractPower" />
+					<TextBox Grid.Row="6" Grid.Column="1" Margin="0 5"
+							 Text="{Binding PneumaticTrailGripFractPower}"/>
+				</Grid>
+			</TabItem>
+		</TabControl>
+	</DockPanel>
 </Window>

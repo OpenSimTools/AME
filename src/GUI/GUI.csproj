@@ -6,13 +6,11 @@
 	<OutputType>WinExe</OutputType>
     <AssemblyName>AME.GUI</AssemblyName>
 	<RootNamespace>AME.GUI</RootNamespace>
-
 	<AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
 	<BuiltInComInteropSupport>true</BuiltInComInteropSupport>
 	<ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
 
-  
   <ItemGroup>
     <AvaloniaResource Include="Assets\**" />
   </ItemGroup>
@@ -25,6 +23,10 @@
     <PackageReference Include="Avalonia.Desktop" Version="$(AvaloniaVersion)" />
 
 	<PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="$(AvaloniaVersion)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MadnessEngineTools\MadnessEngineTools.csproj" />
   </ItemGroup>
 
 </Project>

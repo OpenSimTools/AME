@@ -1,4 +1,4 @@
-﻿using Avalonia.Controls;
+﻿using AME.GUI.ViewModels;
 
 namespace AME.GUI.Views;
 
