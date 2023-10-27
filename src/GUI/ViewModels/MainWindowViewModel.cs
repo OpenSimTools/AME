@@ -1,10 +1,13 @@
 ﻿using ReactiveUI;
 using System.Reactive;
+using System.Reactive.Linq;
 
 namespace AME.GUI.ViewModels;
 
 public class MainWindowViewModel : ViewModelBase
 {
+    public Interaction<Unit, string?> ChooseFile { get; } = new();
+
     private string? mass;
     public string? Mass
     {
@@ -63,9 +66,10 @@ public class MainWindowViewModel : ViewModelBase
         SaveCommand = ReactiveCommand.Create(Save);
     }
 
-    public void Open()
+    public async void Open()
     {
-        System.Diagnostics.Debug.WriteLine($"Open Command");
+        var path = await ChooseFile.Handle(Unit.Default);
+        System.Diagnostics.Debug.WriteLine($"Open Command {path}");
     }
 
     public void Save()
