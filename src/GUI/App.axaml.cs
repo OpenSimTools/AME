@@ -16,13 +16,13 @@ public partial class App : Application
 
     public override void OnFrameworkInitializationCompleted()
     {
-        var vehicleReader = new GameFormatIO();
+        var vehicleIO = new GameFormatIO();
 
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
             desktop.MainWindow = new MainWindow
             {
-                DataContext = new MainWindowViewModel(vehicleReader)
+                DataContext = new MainWindowViewModel(vehicleIO)
             };
         }
 

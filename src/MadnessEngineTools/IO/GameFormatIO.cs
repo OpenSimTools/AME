@@ -1,6 +1,6 @@
 ﻿namespace MadnessEngineTools.IO;
 
-public class GameFormatIO : IVehicleReader
+public class GameFormatIO : IVehicleIO
 {
     private static readonly byte[] MassKey = { 0x21, 0x67, 0x0B, 0x57, 0xAB };
     private static readonly byte[] BodyDragBaseKey = { 0x24, 0x33, 0x63, 0xED, 0xFD, 0x21 };
@@ -32,8 +32,8 @@ public class GameFormatIO : IVehicleReader
         {
             return null;
         }
-        var massValueIndex = keyIndex + key.Length;
-        var valueBytes = contents.AsSpan(massValueIndex, sizeof(int));
+        var valueIndex = keyIndex + key.Length;
+        var valueBytes = contents.AsSpan(valueIndex, sizeof(int));
         return BitConverter.ToInt32(valueBytes);
     }
 
@@ -44,8 +44,61 @@ public class GameFormatIO : IVehicleReader
         {
             return null;
         }
-        var massValueIndex = keyIndex + key.Length;
-        var valueBytes = contents.AsSpan(massValueIndex, sizeof(float));
+        var valueIndex = keyIndex + key.Length;
+        var valueBytes = contents.AsSpan(valueIndex, sizeof(float));
         return BitConverter.ToSingle(valueBytes);
+    }
+
+    public void WriteVehicleChassis(string cdfbinPath, VehicleChassis vehicleChassis)
+    {
+        var contents = File.ReadAllBytes(cdfbinPath);
+        WriteI32(contents, MassKey, vehicleChassis.Mass);
+        WriteF32(contents, BodyDragBaseKey, vehicleChassis.BodyDragBase);
+        WriteF32(contents, GeneralTorqueMultKey, vehicleChassis.GeneralTorqueMult);
+        WriteF32(contents, GeneralPowerMultKey, vehicleChassis.GeneralPowerMult);
+        WriteI32(contents, MaxForceAtSteeringRackKey, vehicleChassis.MaxForceAtSteeringRack);
+        WriteF32(contents, PneumaticTrailKey, vehicleChassis.PneumaticTrail);
+        WriteF32(contents, PneumaticTrailGripFractPowerKey, vehicleChassis.PneumaticTrailGripFractPower);
+        File.WriteAllBytes(cdfbinPath, contents);
+    }
+
+    private static void WriteI32(byte[] contents, byte[] key, int? value)
+    {
+        var keyIndex = contents.AsSpan().IndexOf(key);
+        if (keyIndex < 0)
+        {
+            if (value is not null)
+            {
+                throw new NotImplementedException("Adding a value is not supported");
+            }
+            return;
+        }
+        if (value is null)
+        {
+            throw new NotImplementedException("Removing a value is not supported");
+        }
+        var valueIndex = keyIndex + key.Length;
+        var valueBytes = BitConverter.GetBytes((int)value);
+        valueBytes.CopyTo(contents, valueIndex);
+    }
+
+    private static void WriteF32(byte[] contents, byte[] key, float? value)
+    {
+        var keyIndex = contents.AsSpan().IndexOf(key);
+        if (keyIndex < 0)
+        {
+            if (value is not null)
+            {
+                throw new NotImplementedException("Adding a value is not supported");
+            }
+            return;
+        }
+        if (value is null)
+        {
+            throw new NotImplementedException("Removing a value is not supported");
+        }
+        var valueIndex = keyIndex + key.Length;
+        var valueBytes = BitConverter.GetBytes((float)value);
+        valueBytes.CopyTo(contents, valueIndex);
     }
 }

@@ -59,7 +59,7 @@ public class MainWindowViewModel : ViewModelBase
     }
 
     private string? pneumaticTrailGripFractPower;
-    private readonly IVehicleReader vehicleReader;
+    private readonly IVehicleIO vehicleIO;
 
     public string? PneumaticTrailGripFractPower
     {
@@ -76,34 +76,65 @@ public class MainWindowViewModel : ViewModelBase
 
     #endregion
 
-    public MainWindowViewModel(IVehicleReader vehicleReader)
+    private string? path;
+
+    public MainWindowViewModel(IVehicleIO vehicleIO)
     {
-        this.vehicleReader = vehicleReader;
+        this.vehicleIO = vehicleIO;
         OpenCommand = ReactiveCommand.Create(Open);
         SaveCommand = ReactiveCommand.Create(Save);
     }
 
     public async void Open()
     {
-        var path = await ChooseFile.Handle(Unit.Default);
-        System.Diagnostics.Debug.WriteLine($"Open Command {path}");
-        var vehicleChassis = vehicleReader.ReadVehicleChassis(path);
-        ReadModel(vehicleChassis);
-    }
-
-    private void ReadModel(VehicleChassis vehicleChassis)
-    {
-        Mass = vehicleChassis.Mass?.ToString();
-        BodyDragBase = vehicleChassis.BodyDragBase?.ToString();
-        GeneralTorqueMult = vehicleChassis.GeneralTorqueMult?.ToString();
-        GeneralPowerMult = vehicleChassis.GeneralPowerMult?.ToString();
-        MaxForceAtSteeringRack = vehicleChassis.MaxForceAtSteeringRack?.ToString();
-        PneumaticTrail = vehicleChassis.PneumaticTrail?.ToString();
-        PneumaticTrailGripFractPower = vehicleChassis.PneumaticTrailGripFractPower?.ToString();
+        path = await ChooseFile.Handle(Unit.Default);
+        if (path is not null)
+        {
+            var vehicleChassis = vehicleIO.ReadVehicleChassis(path);
+            Mass = vehicleChassis.Mass?.ToString();
+            BodyDragBase = vehicleChassis.BodyDragBase?.ToString();
+            GeneralTorqueMult = vehicleChassis.GeneralTorqueMult?.ToString();
+            GeneralPowerMult = vehicleChassis.GeneralPowerMult?.ToString();
+            MaxForceAtSteeringRack = vehicleChassis.MaxForceAtSteeringRack?.ToString();
+            PneumaticTrail = vehicleChassis.PneumaticTrail?.ToString();
+            PneumaticTrailGripFractPower = vehicleChassis.PneumaticTrailGripFractPower?.ToString();
+        }
     }
 
     public void Save()
     {
-        System.Diagnostics.Debug.WriteLine($"Save Command");
+        if (path is not null)
+        {
+            var vehicleChassis = new VehicleChassis();
+            if (!String.IsNullOrEmpty(Mass))
+            {
+                vehicleChassis.Mass = Int32.Parse(Mass);
+            }
+            if (!String.IsNullOrEmpty(BodyDragBase))
+            {
+                vehicleChassis.BodyDragBase = Single.Parse(BodyDragBase);
+            }
+            if (!String.IsNullOrEmpty(GeneralTorqueMult))
+            {
+                vehicleChassis.GeneralTorqueMult = Single.Parse(GeneralTorqueMult);
+            }
+            if (!String.IsNullOrEmpty(GeneralPowerMult))
+            {
+                vehicleChassis.GeneralPowerMult = Single.Parse(GeneralPowerMult);
+            }
+            if (!String.IsNullOrEmpty(MaxForceAtSteeringRack))
+            {
+                vehicleChassis.MaxForceAtSteeringRack = Int32.Parse(MaxForceAtSteeringRack);
+            }
+            if (!String.IsNullOrEmpty(PneumaticTrail))
+            {
+                vehicleChassis.PneumaticTrail = Single.Parse(PneumaticTrail);
+            }
+            if (!String.IsNullOrEmpty(PneumaticTrailGripFractPower))
+            {
+                vehicleChassis.PneumaticTrailGripFractPower = Single.Parse(PneumaticTrailGripFractPower);
+            }
+            vehicleIO.WriteVehicleChassis(path, vehicleChassis);
+        }
     }
 }
