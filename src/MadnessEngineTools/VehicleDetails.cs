@@ -1,6 +1,4 @@
-﻿using UnitsNet;
-
-namespace MadnessEngineTools;
+﻿namespace MadnessEngineTools;
 
 public class VehicleDetails
 {
@@ -14,7 +12,7 @@ public record VehiclePhysicsModel(string Name)
 
 public class VehicleChassis
 {
-    public Mass? Mass { get; set; }
+    public int? Mass { get; set; }
 
     // Body Aero
     public float? BodyDragBase { get; set; }

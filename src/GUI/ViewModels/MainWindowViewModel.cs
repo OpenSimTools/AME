@@ -93,7 +93,7 @@ public class MainWindowViewModel : ViewModelBase
 
     private void ReadModel(VehicleChassis vehicleChassis)
     {
-        Mass = vehicleChassis.Mass?.Kilograms.ToString();
+        Mass = vehicleChassis.Mass?.ToString();
         BodyDragBase = vehicleChassis.BodyDragBase?.ToString();
         GeneralTorqueMult = vehicleChassis.GeneralTorqueMult?.ToString();
         GeneralPowerMult = vehicleChassis.GeneralPowerMult?.ToString();
