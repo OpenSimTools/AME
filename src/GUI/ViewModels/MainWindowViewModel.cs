@@ -16,52 +16,50 @@ public class MainWindowViewModel : ViewModelBase
 
     #region Properties
 
-    private string? mass;
-    public string? Mass
+    private int? mass;
+    public int? Mass
     {
         get => mass;
         set => this.RaiseAndSetIfChanged(ref mass, value);
     }
 
-    private string? bodyDragBase;
-    public string? BodyDragBase
+    private float? bodyDragBase;
+    public float? BodyDragBase
     {
         get => bodyDragBase;
         set => this.RaiseAndSetIfChanged(ref bodyDragBase, value);
     }
 
-    private string? generalTorqueMult;
-    public string? GeneralTorqueMult
+    private float? generalTorqueMult;
+    public float? GeneralTorqueMult
     {
         get => generalTorqueMult;
         set => this.RaiseAndSetIfChanged(ref generalTorqueMult, value);
     }
 
-    private string? generalPowerMult;
-    public string? GeneralPowerMult
+    private float? generalPowerMult;
+    public float? GeneralPowerMult
     {
         get => generalPowerMult;
         set => this.RaiseAndSetIfChanged(ref generalPowerMult, value);
     }
 
-    private string? maxForceAtSteeringRack;
-    public string? MaxForceAtSteeringRack
+    private int? maxForceAtSteeringRack;
+    public int? MaxForceAtSteeringRack
     {
         get => maxForceAtSteeringRack;
         set => this.RaiseAndSetIfChanged(ref maxForceAtSteeringRack, value);
     }
 
-    private string? pneumaticTrail;
-    public string? PneumaticTrail
+    private float? pneumaticTrail;
+    public float? PneumaticTrail
     {
         get => pneumaticTrail;
         set => this.RaiseAndSetIfChanged(ref pneumaticTrail, value);
     }
 
-    private string? pneumaticTrailGripFractPower;
-    private readonly IVehicleIO vehicleIO;
-
-    public string? PneumaticTrailGripFractPower
+    private float? pneumaticTrailGripFractPower;
+    public float? PneumaticTrailGripFractPower
     {
         get => pneumaticTrailGripFractPower;
         set => this.RaiseAndSetIfChanged(ref pneumaticTrailGripFractPower, value);
@@ -76,6 +74,7 @@ public class MainWindowViewModel : ViewModelBase
 
     #endregion
 
+    private readonly IVehicleIO vehicleIO;
     private string? path;
 
     public MainWindowViewModel(IVehicleIO vehicleIO)
@@ -91,13 +90,13 @@ public class MainWindowViewModel : ViewModelBase
         if (path is not null)
         {
             var vehicleChassis = vehicleIO.ReadVehicleChassis(path);
-            Mass = vehicleChassis.Mass?.ToString();
-            BodyDragBase = vehicleChassis.BodyDragBase?.ToString();
-            GeneralTorqueMult = vehicleChassis.GeneralTorqueMult?.ToString();
-            GeneralPowerMult = vehicleChassis.GeneralPowerMult?.ToString();
-            MaxForceAtSteeringRack = vehicleChassis.MaxForceAtSteeringRack?.ToString();
-            PneumaticTrail = vehicleChassis.PneumaticTrail?.ToString();
-            PneumaticTrailGripFractPower = vehicleChassis.PneumaticTrailGripFractPower?.ToString();
+            Mass = vehicleChassis.Mass;
+            BodyDragBase = vehicleChassis.BodyDragBase;
+            GeneralTorqueMult = vehicleChassis.GeneralTorqueMult;
+            GeneralPowerMult = vehicleChassis.GeneralPowerMult;
+            MaxForceAtSteeringRack = vehicleChassis.MaxForceAtSteeringRack;
+            PneumaticTrail = vehicleChassis.PneumaticTrail;
+            PneumaticTrailGripFractPower = vehicleChassis.PneumaticTrailGripFractPower;
         }
     }
 
@@ -106,34 +105,13 @@ public class MainWindowViewModel : ViewModelBase
         if (path is not null)
         {
             var vehicleChassis = new VehicleChassis();
-            if (!String.IsNullOrEmpty(Mass))
-            {
-                vehicleChassis.Mass = Int32.Parse(Mass);
-            }
-            if (!String.IsNullOrEmpty(BodyDragBase))
-            {
-                vehicleChassis.BodyDragBase = Single.Parse(BodyDragBase);
-            }
-            if (!String.IsNullOrEmpty(GeneralTorqueMult))
-            {
-                vehicleChassis.GeneralTorqueMult = Single.Parse(GeneralTorqueMult);
-            }
-            if (!String.IsNullOrEmpty(GeneralPowerMult))
-            {
-                vehicleChassis.GeneralPowerMult = Single.Parse(GeneralPowerMult);
-            }
-            if (!String.IsNullOrEmpty(MaxForceAtSteeringRack))
-            {
-                vehicleChassis.MaxForceAtSteeringRack = Int32.Parse(MaxForceAtSteeringRack);
-            }
-            if (!String.IsNullOrEmpty(PneumaticTrail))
-            {
-                vehicleChassis.PneumaticTrail = Single.Parse(PneumaticTrail);
-            }
-            if (!String.IsNullOrEmpty(PneumaticTrailGripFractPower))
-            {
-                vehicleChassis.PneumaticTrailGripFractPower = Single.Parse(PneumaticTrailGripFractPower);
-            }
+            vehicleChassis.Mass = Mass;
+            vehicleChassis.BodyDragBase = BodyDragBase;
+            vehicleChassis.GeneralTorqueMult = GeneralTorqueMult;
+            vehicleChassis.GeneralPowerMult = GeneralPowerMult;
+            vehicleChassis.MaxForceAtSteeringRack = MaxForceAtSteeringRack;
+            vehicleChassis.PneumaticTrail = PneumaticTrail;
+            vehicleChassis.PneumaticTrailGripFractPower = PneumaticTrailGripFractPower;
             vehicleIO.WriteVehicleChassis(path, vehicleChassis);
         }
     }
