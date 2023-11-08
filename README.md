@@ -1,4 +1,3 @@
-# Automobilista 2 Mods Editor
+# MEME - Madness Engine Mods Editor
 
 **This is a work in progress**
-

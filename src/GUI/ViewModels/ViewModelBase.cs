@@ -1,6 +1,6 @@
 ﻿using ReactiveUI;
 
-namespace AME.GUI.ViewModels;
+namespace MEME.GUI.ViewModels;
 
 public class ViewModelBase : ReactiveObject
 {

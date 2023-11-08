@@ -4,8 +4,8 @@
     <Nullable>enable</Nullable>
     <LangVersion>latest</LangVersion>
 	<OutputType>WinExe</OutputType>
-    <AssemblyName>AME.GUI</AssemblyName>
-	<RootNamespace>AME.GUI</RootNamespace>
+    <AssemblyName>MEME.GUI</AssemblyName>
+	<RootNamespace>MEME.GUI</RootNamespace>
 	<AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
 	<BuiltInComInteropSupport>true</BuiltInComInteropSupport>
 	<ApplicationManifest>app.manifest</ApplicationManifest>

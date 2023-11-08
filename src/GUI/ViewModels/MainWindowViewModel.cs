@@ -4,7 +4,7 @@ using ReactiveUI;
 using System.Reactive;
 using System.Reactive.Linq;
 
-namespace AME.GUI.ViewModels;
+namespace MEME.GUI.ViewModels;
 
 public class MainWindowViewModel : ViewModelBase
 {

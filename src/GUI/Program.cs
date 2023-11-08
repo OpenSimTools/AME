@@ -1,4 +1,4 @@
-﻿namespace AME.GUI;
+﻿namespace MEME.GUI;
 
 class Program
 {

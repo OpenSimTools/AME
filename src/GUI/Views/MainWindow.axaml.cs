@@ -1,9 +1,9 @@
 ﻿using System.Threading.Tasks;
-using AME.GUI.ViewModels;
+using MEME.GUI.ViewModels;
 using Avalonia.Platform.Storage;
 using ReactiveUI;
 
-namespace AME.GUI.Views;
+namespace MEME.GUI.Views;
 
 public partial class MainWindow : ReactiveWindow<MainWindowViewModel>
 {

@@ -1,11 +1,11 @@
 ﻿using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 
-using AME.GUI.ViewModels;
-using AME.GUI.Views;
+using MEME.GUI.ViewModels;
+using MEME.GUI.Views;
 using MadnessEngineTools.IO;
 
-namespace AME.GUI;
+namespace MEME.GUI;
 
 public partial class App : Application
 {
