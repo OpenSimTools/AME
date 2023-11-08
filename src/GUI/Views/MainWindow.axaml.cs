@@ -26,9 +26,7 @@ public partial class MainWindow : ReactiveWindow<MainWindowViewModel>
         {
             Title = "Open Chassis File",
             AllowMultiple = false,
-            FileTypeFilter = new[] { new FilePickerFileType("cdfbin")             {
-                Patterns = new[] { "*.cdfbin" }
-            }}
+            FileTypeFilter = new[] { new FilePickerFileType("cdfbin") { Patterns = new[] { "*.cdfbin" } } }
         });
         return files?.Select(_ => _.TryGetLocalPath()).FirstOrDefault();
     }
