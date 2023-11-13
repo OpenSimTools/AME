@@ -1,0 +1,67 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:MEME.GUI.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:views="clr-namespace:MEME.GUI.Views"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="MEME.GUI.Views.MainWindow"
+		x:DataType="vm:MainWindowViewModel"
+		Icon="/Assets/avalonia-logo.ico"
+        Title="AMS2 Mods Editor">
+	<Design.DataContext>
+		<vm:MainWindowViewModel />
+	</Design.DataContext>
+
+	<DockPanel>
+		<Menu DockPanel.Dock="Top">
+			<MenuItem Header="_File">
+				<MenuItem Header="_Open" Command="{Binding OpenCommand}"/>
+				<MenuItem Header="_Save" Command="{Binding SaveCommand}"/>
+			</MenuItem>
+		</Menu>
+
+		<TabControl>
+			<TabItem Header="Chassis">
+				<Grid Margin="5"
+  ColumnDefinitions="Auto,Auto"
+  RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto">
+					<Label Grid.Row="0" Grid.Column="0" Margin="10"
+						   Content="Mass" />
+					<TextBox Grid.Row="0" Grid.Column="1" Margin="0 5"
+							 Text="{Binding Mass}"/>
+
+					<Label Grid.Row="1" Grid.Column="0" Margin="10"
+						   Content="BodyDragBase" />
+					<TextBox Grid.Row="1" Grid.Column="1" Margin="0 5"
+							 Text="{Binding BodyDragBase}"/>
+
+					<Label Grid.Row="2" Grid.Column="0" Margin="10"
+						   Content="GeneralTorqueMult" />
+					<TextBox Grid.Row="2" Grid.Column="1" Margin="0 5"
+							 Text="{Binding GeneralTorqueMult}"/>
+
+					<Label Grid.Row="3" Grid.Column="0" Margin="10"
+						   Content="GeneralPowerMult" />
+					<TextBox Grid.Row="3" Grid.Column="1" Margin="0 5"
+							 Text="{Binding GeneralPowerMult}"/>
+
+					<Label Grid.Row="4" Grid.Column="0" Margin="10"
+				   Content="MaxForceAtSteeringRack" />
+					<TextBox Grid.Row="4" Grid.Column="1" Margin="0 5"
+							 Text="{Binding MaxForceAtSteeringRack}"/>
+
+					<Label Grid.Row="5" Grid.Column="0" Margin="10"
+					   Content="PneumaticTrail" />
+					<TextBox Grid.Row="5" Grid.Column="1" Margin="0 5"
+							 Text="{Binding PneumaticTrail}"/>
+
+					<Label Grid.Row="6" Grid.Column="0" Margin="10"
+					   Content="PneumaticTrailGripFractPower" />
+					<TextBox Grid.Row="6" Grid.Column="1" Margin="0 5"
+							 Text="{Binding PneumaticTrailGripFractPower}"/>
+				</Grid>
+			</TabItem>
+		</TabControl>
+	</DockPanel>
+</Window>
