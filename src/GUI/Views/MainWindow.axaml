@@ -8,7 +8,7 @@
         x:Class="MEME.GUI.Views.MainWindow"
 		x:DataType="vm:MainWindowViewModel"
 		Icon="/Assets/avalonia-logo.ico"
-        Title="AMS2 Mods Editor">
+        Title="Madness Engine Mods Editor">
 	<Design.DataContext>
 		<vm:MainWindowViewModel />
 	</Design.DataContext>
