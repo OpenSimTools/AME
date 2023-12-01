@@ -27,14 +27,11 @@ jobs:
       with:
         dotnet-version: 6.0.x
     - name: Setup MSBuild
-      uses: microsoft/setup-msbuild@v1.0.2
-    - name: Configure NuGet repository
-      run: dotnet nuget add source --username USERNAME --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/OpenSimTools/index.json"
+      uses: microsoft/setup-msbuild@v1.3
 
     - name: Build
       run: |
-        msbuild /t:Restore /p:Configuration=${{ matrix.configuration }}
-        msbuild /t:Build /p:Configuration=${{ matrix.configuration }}
+        msbuild -t:rebuild -property:Configuration=${{ matrix.configuration }}
 
     - name: Upload license
       uses: actions/upload-artifact@v3
