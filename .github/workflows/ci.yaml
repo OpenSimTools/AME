@@ -31,7 +31,8 @@ jobs:
 
     - name: Build
       run: |
-        msbuild -t:rebuild -property:Configuration=${{ matrix.configuration }}
+        msbuild -t:restore -property:Configuration=${{ matrix.configuration }}
+        msbuild -t:build -property:Configuration=${{ matrix.configuration }}
 
     - name: Upload license
       uses: actions/upload-artifact@v3
